@@ -6,8 +6,8 @@ Servo forwardservo;
 
 int gripservo_value = 10;
 int baseservo_value = 1;
-int updownservo_value = 1;
-int forwardservo_value = 1;
+int updownservo_value = 90;
+int forwardservo_value = 90;
 boolean is_grip_open = false;
 
 int modeSpeed = 1;
@@ -36,13 +36,13 @@ void loop()
 //        updownservo_value = updownservo_value * modeSpeed * multiplier;
         
         if ( updownservo_value > 180 ) {
-          updownservo_value = 180;
+          updownservo_value = 160;
         }
     } else if ( keypressed == 'D' ) {
         updownservo_value -= 10;
 //        updownservo_value = updownservo_value * modeSpeed * multiplier;
         
-        if ( updownservo_value < 0 ) {
+        if ( updownservo_value < 50 ) {
           updownservo_value = 0;
         }
         
@@ -62,18 +62,18 @@ void loop()
         }
 
         
-    } else if ( keypressed == 'H' ) {
+    } else if ( keypressed == 'K' ) {
         forwardservo_value += 10;
 //        forwardservo_value = forwardservo_value * modeSpeed * multiplier;
         
         if ( forwardservo_value > 180 ) {
           forwardservo_value = 180;
         }
-    } else if ( keypressed == 'K' ) {
+    } else if ( keypressed == 'H' ) {
         forwardservo_value -= 10;
 //        forwardservo_value = forwardservo_value * modeSpeed * multiplier;
         
-        if ( forwardservo_value < 0 ) {
+        if ( forwardservo_value < 90 ) {
           forwardservo_value = 0;
         }
 
