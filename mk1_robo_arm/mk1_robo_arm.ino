@@ -10,9 +10,8 @@ int updownservo_value = 90;
 int forwardservo_value = 90;
 boolean is_grip_open = false;
 
-int modeSpeed = 1;
-int maxModeSpeed = 7;
-int multiplier = 3;
+int multiplierSpeed = 10;
+int multiplierDifference = -2;
 
 void setup() 
 {
@@ -32,52 +31,42 @@ void loop()
     char keypressed = Serial.read();
     
     if ( keypressed == 'U' ) {
-        updownservo_value += 10;
-//        updownservo_value = updownservo_value * modeSpeed * multiplier;
+        updownservo_value += multiplierSpeed;
         
         if ( updownservo_value > 180 ) {
           updownservo_value = 160;
         }
     } else if ( keypressed == 'D' ) {
-        updownservo_value -= 10;
-//        updownservo_value = updownservo_value * modeSpeed * multiplier;
+        updownservo_value -= multiplierSpeed;
         
         if ( updownservo_value < 50 ) {
           updownservo_value = 0;
         }
         
     } else if ( keypressed == 'L' ) {
-        baseservo_value += 10;
-//        baseservo_value = baseservo_value * modeSpeed * multiplier;
+        baseservo_value += multiplierSpeed;
         
         if ( baseservo_value > 180 ) {
           baseservo_value = 180;
         }
     } else if ( keypressed == 'R' ) {
-        baseservo_value -= 10;
-//        baseservo_value = baseservo_value * modeSpeed * multiplier;
+        baseservo_value -= multiplierSpeed;
         
         if ( baseservo_value < 0 ) {
           baseservo_value = 0;
         }
-
-        
     } else if ( keypressed == 'K' ) {
-        forwardservo_value += 10;
-//        forwardservo_value = forwardservo_value * modeSpeed * multiplier;
+        forwardservo_value += multiplierSpeed;
         
         if ( forwardservo_value > 180 ) {
           forwardservo_value = 180;
         }
     } else if ( keypressed == 'H' ) {
-        forwardservo_value -= 10;
-//        forwardservo_value = forwardservo_value * modeSpeed * multiplier;
+        forwardservo_value -= multiplierSpeed;
         
         if ( forwardservo_value < 90 ) {
-          forwardservo_value = 0;
+          forwardservo_value = 90;
         }
-
-        
     } else if ( keypressed == 'S' ) {
       if ( is_grip_open ) {
         is_grip_open = false;
@@ -85,10 +74,16 @@ void loop()
         is_grip_open = true;
       }
     } else if ( keypressed == 'T' ) {
-      modeSpeed += 1;
+      multiplierSpeed += multiplierDifference;
       
-      if ( modeSpeed > maxModeSpeed ) {
-        modeSpeed = 1;
+      if ( multiplierSpeed < 0 ) {
+        multiplierSpeed = 1;
+        multiplierDifference = -multiplierDifference;
+      }
+
+      if ( multiplierSpeed > 10 ) {
+        multiplierSpeed = 10;
+        multiplierDifference = -multiplierDifference;
       }
     }
   }
@@ -100,10 +95,16 @@ void loop()
   Serial.print(  updownservo_value );
   
   Serial.print( " forwardservo_value= " );
-  Serial.println( forwardservo_value );
+  Serial.print( forwardservo_value );
+  
+  Serial.print( " multiplierSpeed= " );
+  Serial.print( multiplierSpeed );
+  
+  Serial.print( " multiplierDifference= " );
+  Serial.println( multiplierDifference );
   
   if ( is_grip_open ) {
-    gripservo_value = 50;
+    gripservo_value = 40;
   } else {
     gripservo_value = 10;
   }
@@ -113,5 +114,5 @@ void loop()
   forwardservo.write( forwardservo_value );
   updownservo.write( updownservo_value );
   
-  delay( 50 );
+  delay( 10 );
 }
