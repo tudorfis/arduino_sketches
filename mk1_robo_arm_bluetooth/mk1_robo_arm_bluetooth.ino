@@ -26,22 +26,6 @@ void setup()
 
 void loop()
 {
-
-  int a4value = analogRead( A4 );
-  int a5value = analogRead( A5 );
-  int a6value = analogRead( A6 );
-  int a7value = analogRead( A7 );
-
-  Serial.print( " a4value= " );
-  Serial.print( a4value );
-  Serial.print( " a5value= " );
-  Serial.print( a5value );
-  Serial.print( " a6value= " );
-  Serial.print( a6value );
-  Serial.print( " a7value= " );
-  Serial.println( a7value );
-
-//  delay( 1000 );
   
   if ( Serial.available() > 0 ) {
     char keypressed = Serial.read();
@@ -103,21 +87,21 @@ void loop()
       }
     }
   }
-//
-//  Serial.print( "baseservo_value= " );
-//  Serial.print( baseservo_value );
-//  
-//  Serial.print( " updownservo_value= " );
-//  Serial.print(  updownservo_value );
-//  
-//  Serial.print( " forwardservo_value= " );
-//  Serial.print( forwardservo_value );
-//  
-//  Serial.print( " multiplierSpeed= " );
-//  Serial.print( multiplierSpeed );
-//  
-//  Serial.print( " multiplierDifference= " );
-//  Serial.println( multiplierDifference );
+
+  Serial.print( "baseservo_value= " );
+  Serial.print( baseservo_value );
+  
+  Serial.print( " updownservo_value= " );
+  Serial.print(  updownservo_value );
+  
+  Serial.print( " forwardservo_value= " );
+  Serial.print( forwardservo_value );
+  
+  Serial.print( " multiplierSpeed= " );
+  Serial.print( multiplierSpeed );
+  
+  Serial.print( " multiplierDifference= " );
+  Serial.println( multiplierDifference );
   
   if ( is_grip_open ) {
     gripservo_value = 40;
