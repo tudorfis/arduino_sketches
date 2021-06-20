@@ -10,13 +10,8 @@ void setup()
   mpu6050.begin();
 }
 
-//int IX = mpu6050.getAngleX();
-//int IY = mpu6050.getAngleY();
-//int IZ = mpu6050.getAngleZ();
-
 void loop()
 {
-  
   mpu6050.update();
   
   int x = mpu6050.getAngleX();
@@ -24,12 +19,11 @@ void loop()
   int z = mpu6050.getAngleZ();
 
 
-  Serial.print( "x=" );
   Serial.print( x );
-  Serial.print( " y=" );
+  Serial.print( "," );
   Serial.print( y );
-  Serial.print( " z=" );
+  Serial.print( "," );
   Serial.println( z );
  
-  delay( 10 );
+//  delay( 300 );
 }
